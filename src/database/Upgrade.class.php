@@ -75,7 +75,8 @@ class Upgrade extends Version {
 	//=========================================================================
 	public function __construct($versionFileLocation, $upgradeConfigFile, Database $db, $rwDir=null) {
 		
-		$this->internalVersion = new Version(__DIR__ .'/../VERSION');
+		$this->versionFileLocation = __DIR__ .'/../../VERSION';
+		$this->internalVersion = new Version($this->versionFileLocation);
 		$this->internalProjectName = $this->internalVersion->get_project();
 		
 		
@@ -93,7 +94,7 @@ class Upgrade extends Version {
 		
 		$this->db = $db;
 		
-		parent::__construct(true);
+		parent::__construct(__DIR__ .'/../../VERSION');
 		
 		if(!file_exists($upgradeConfigFile) || !is_readable($upgradeConfigFile)) {
 			throw new Exception(__METHOD__ .": required upgrade config file location (". $upgradeConfigFile .") not set or unreadable");
@@ -106,7 +107,7 @@ class Upgrade extends Version {
 		}
 		
 		
-		$this->externalVersion = new Version($versionFileLocation);
+		$this->externalVersion = new Version($this->versionFileLocation);
 		
 		if(!is_null($rwDir) && strlen($rwDir) > 0) {
 			$this->rwDir = $rwDir;
