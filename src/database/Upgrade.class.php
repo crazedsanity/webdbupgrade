@@ -1,17 +1,18 @@
 <?php
-/*
- * Created on Jul 2, 2007
- * 
- */
+
+namespace crazedsanity\database;
 
 use crazedsanity\database\Database;
 use crazedsanity\version\Version;
 use crazedsanity\core\ToolBox;
+use crazedsanity\lockfile\LockFile;
 
-class cs_webdbupgrade extends cs_webapplibsAbstract {
-	
-	/** cs_globalFunctions{} object: debugging, array, and string operations. */
-	protected $gfObj;
+use \ErrorException;
+use \Exception;
+use \InvalidArgumentException;
+use \LogicException;
+
+class Upgrade extends Version {
 	
 	/** Array of configuration parameters. */
 	protected $config = NULL;
@@ -41,6 +42,7 @@ class cs_webdbupgrade extends cs_webapplibsAbstract {
 	private $internalProjectName = "";
 	
 	protected $internalVersion;
+	protected $externalVersion;
 	
 	/** Log messages to store during an internal upgrade (to avoid problems) */
 	protected $storedLogs = array();
@@ -76,8 +78,7 @@ class cs_webdbupgrade extends cs_webapplibsAbstract {
 		$this->internalVersion = new Version(__DIR__ .'/../VERSION');
 		$this->internalProjectName = $this->internalVersion->get_project();
 		
-		$this->set_version_file_location(__DIR__ .'/../VERSION');
-		$this->internalProjectName = $this->get_project();
+		
 		
 		if(isset(self::$calls)) {
 			self::$calls += 1;
@@ -95,16 +96,17 @@ class cs_webdbupgrade extends cs_webapplibsAbstract {
 		parent::__construct(true);
 		
 		if(!file_exists($upgradeConfigFile) || !is_readable($upgradeConfigFile)) {
-			throw new exception(__METHOD__ .": required upgrade config file location (". $upgradeConfigFile .") not set or unreadable");
+			throw new Exception(__METHOD__ .": required upgrade config file location (". $upgradeConfigFile .") not set or unreadable");
 		}
 		else {
 			$this->upgradeConfigFile = $upgradeConfigFile;
 		}
 		if(!strlen($versionFileLocation) || !file_exists($versionFileLocation)) {
-			throw new exception(__METHOD__ .": unable to locate version file (". $versionFileLocation .")");
+			throw new Exception(__METHOD__ .": unable to locate version file (". $versionFileLocation .")");
 		}
 		
-		$this->set_version_file_location($versionFileLocation);
+		
+		$this->externalVersion = new Version($versionFileLocation);
 		
 		if(!is_null($rwDir) && strlen($rwDir) > 0) {
 			$this->rwDir = $rwDir;
@@ -123,13 +125,10 @@ class cs_webdbupgrade extends cs_webapplibsAbstract {
 		}
 		
 		
-		$this->lockObj = new cs_lockfile($this->rwDir, $this->lockFile);
+		$this->lockObj = new LockFile($this->rwDir, $this->lockFile);
 		
-		$this->projectName = $this->get_project();
+		$this->projectName = $this->externalVersion->get_project();
 		
-		
-//		$this->check_internal_upgrades();
-//		$this->check_versions(false);
 	}//end __construct()
 	//=========================================================================
 	
@@ -186,17 +185,12 @@ class cs_webdbupgrade extends cs_webapplibsAbstract {
 				$this->get_database_version();
 			}
 			catch(exception $e) {
-				throw new exception(__METHOD__ .": error while retrieving database version: ". $e->getMessage());
-
-				//try creating the version.
-				$this->load_initial_version();
+				throw new Exception(__METHOD__ .": error while retrieving database version: ". $e->getMessage());
 			}
 
 			//do upgrades here...
 			$this->check_versions(true);
 			$this->internalUpgradeInProgress = false;
-
-
 
 
 			//reset internal vars.
@@ -230,7 +224,7 @@ class cs_webdbupgrade extends cs_webapplibsAbstract {
 		else {
 			if($performUpgrade && $this->is_upgrade_in_progress()) {
 				$this->do_log("Upgrade in progress", 'notice');
-				throw new exception(__METHOD__ .": upgrade in progress");
+				throw new Exception(__METHOD__ .": upgrade in progress");
 			}
 			
 			$retval = NULL;
@@ -467,7 +461,7 @@ class cs_webdbupgrade extends cs_webapplibsAbstract {
 	//=========================================================================
 	public static function parse_version_string($versionString) {
 		if(is_null($versionString) || !strlen($versionString)) {
-			throw new exception(__METHOD__ .": invalid version string ($versionString)");
+			throw new Exception(__METHOD__ .": invalid version string ($versionString)");
 		}
 		
 		$suffix = "";
@@ -496,7 +490,7 @@ class cs_webdbupgrade extends cs_webapplibsAbstract {
 			$retval['version_suffix'] = $suffix;
 		}
 		else {
-			throw new exception(__METHOD__ .": invalid version string format, requires MAJOR.MINOR syntax (". $versionString .")");
+			throw new Exception(__METHOD__ .": invalid version string format, requires MAJOR.MINOR syntax (". $versionString .")");
 		}
 		
 		return($retval);
@@ -837,7 +831,7 @@ class cs_webdbupgrade extends cs_webapplibsAbstract {
 				$this->load_initial_version();
 			}
 			else {
-				throw new exception(__METHOD__ .": missing projectName (". $this->projectName .") " .
+				throw new Exception(__METHOD__ .": missing projectName (". $this->projectName .") " .
 						"or versionFileVersion (". $this->versionFileVersion ."), cannot load data");
 			}
 		}
@@ -879,14 +873,14 @@ class cs_webdbupgrade extends cs_webapplibsAbstract {
 	public function error_handler($details) {
 		//log the error.
 		if(!is_object($this->logsObj)) {
-			throw new exception($details);
+			throw new Exception($details);
 		}
 		if(self::internalUpgradeInProgress === false) {
 			$this->do_log($details, 'exception in code');
 		}
 		
 		//now throw an exception so other code can catch it.
-		throw new exception($details);
+		throw new Exception($details);
 	}//end error_handler()
 	//=========================================================================
 	
