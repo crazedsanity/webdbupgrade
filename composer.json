@@ -1,0 +1,25 @@
+{
+	"name":	"crazedsanity/webdbupgrade",
+	"type": "library",
+	"description": "Library for handling scripted upgrades to a web application",
+	"keywords": ["php", "web", "database", "upgrades"],
+	"homepage": "https://github.com/crazedsanity/webdbupgrade",
+	"license": "MIT",
+	"authors": [
+		{
+			"name":	"Dan Falconer",
+			"email": "github@crazedsanity.com",
+			"homepage": "http://www.crazedsanity.com",
+			"role": "Developer"
+		}
+	],
+	"autoload": {
+		"classmap": ["src"]
+	},
+	"require": {
+		"php": ">=5.3.0",
+		"crazedsanity/lockfile": "^0.1",
+		"crazedsanity/database": "^0.4"
+	},
+	"minimum-stability": "dev"
+}

@@ -1,0 +1,251 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "This file is @generated automatically"
+    ],
+    "hash": "e5d949bdd6cf3384098f7897959aa884",
+    "content-hash": "5c39d786c546f48adfdd3cb128354f7c",
+    "packages": [
+        {
+            "name": "crazedsanity/core",
+            "version": "v0.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crazedsanity/core.git",
+                "reference": "b241ca855633fb39f80e1a6ade2cd7d61e56476a"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crazedsanity/core/zipball/b241ca855633fb39f80e1a6ade2cd7d61e56476a",
+                "reference": "b241ca855633fb39f80e1a6ade2cd7d61e56476a",
+                "shasum": ""
+            },
+            "require": {
+                "crazedsanity/version": "~0.1",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dan Falconer",
+                    "email": "github@crazedsanity.com",
+                    "homepage": "http://www.crazedsanity.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Core PHP libraries for all things Crazed(Sanity).",
+            "homepage": "http://www.crazedsanity.com",
+            "keywords": [
+                "dry",
+                "oaoo",
+                "php"
+            ],
+            "time": "2016-08-13 00:29:30"
+        },
+        {
+            "name": "crazedsanity/database",
+            "version": "v0.4.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crazedsanity/database.git",
+                "reference": "a0e8eb90041b0352a3709f89fe22d4f598502e30"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crazedsanity/database/zipball/a0e8eb90041b0352a3709f89fe22d4f598502e30",
+                "reference": "a0e8eb90041b0352a3709f89fe22d4f598502e30",
+                "shasum": ""
+            },
+            "require": {
+                "crazedsanity/core": "~0.3",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dan Falconer",
+                    "email": "github@crazedsanity.com",
+                    "homepage": "http://www.crazedsanity.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Database abstraction library.",
+            "homepage": "http://www.crazedsanity.com",
+            "keywords": [
+                "database",
+                "dry",
+                "mysql",
+                "oaoo",
+                "pdo",
+                "php",
+                "postgres",
+                "sqlite"
+            ],
+            "time": "2016-11-07 00:26:09"
+        },
+        {
+            "name": "crazedsanity/filesystem",
+            "version": "v0.3.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crazedsanity/filesystem.git",
+                "reference": "6f43f2606f41f9cf2e3d3783780934051f822b80"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crazedsanity/filesystem/zipball/6f43f2606f41f9cf2e3d3783780934051f822b80",
+                "reference": "6f43f2606f41f9cf2e3d3783780934051f822b80",
+                "shasum": ""
+            },
+            "require": {
+                "crazedsanity/core": "~0.3",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dan Falconer",
+                    "email": "github@crazedsanity.com",
+                    "homepage": "http://www.crazedsanity.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Library for manipulating the filesystem for all things Crazed(Sanity).",
+            "homepage": "http://www.crazedsanity.com",
+            "keywords": [
+                "dry",
+                "filesystem",
+                "oaoo",
+                "php"
+            ],
+            "time": "2016-11-07 21:27:41"
+        },
+        {
+            "name": "crazedsanity/lockfile",
+            "version": "v0.1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crazedsanity/lockfile.git",
+                "reference": "123f5e0e97e41c4b3c7f31a12cf18322886555df"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crazedsanity/lockfile/zipball/123f5e0e97e41c4b3c7f31a12cf18322886555df",
+                "reference": "123f5e0e97e41c4b3c7f31a12cf18322886555df",
+                "shasum": ""
+            },
+            "require": {
+                "crazedsanity/filesystem": "^0.3",
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dan Falconer",
+                    "email": "github@crazedsanity.com",
+                    "homepage": "http://www.crazedsanity.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Create a *.lock file, such as to lock down upgrades from running concurrently.",
+            "homepage": "http://www.crazedsanity.com",
+            "keywords": [
+                "dry",
+                "oaoo",
+                "php"
+            ],
+            "time": "2016-11-07 21:32:52"
+        },
+        {
+            "name": "crazedsanity/version",
+            "version": "v0.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/crazedsanity/version.git",
+                "reference": "b1d287c8908fc6d92563cc4d5bc9077fce9f70cf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/crazedsanity/version/zipball/b1d287c8908fc6d92563cc4d5bc9077fce9f70cf",
+                "reference": "b1d287c8908fc6d92563cc4d5bc9077fce9f70cf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "classmap": [
+                    "src/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dan Falconer",
+                    "email": "github@crazedsanity.com",
+                    "homepage": "http://www.crazedsanity.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Version parsing class, derived from cs-content, mostly SemVer compliant",
+            "homepage": "http://www.crazedsanity.com",
+            "keywords": [
+                "dry",
+                "oaoo",
+                "php"
+            ],
+            "time": "2016-06-30 21:52:15"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=5.3.0"
+    },
+    "platform-dev": []
+}
